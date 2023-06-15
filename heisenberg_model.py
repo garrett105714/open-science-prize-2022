@@ -94,3 +94,137 @@ class HeisenbergModel(LatticeModel):
                 ham.append((f"Y_{index_left} Y_{index_right}", coupling_parameter))
                 ham.append((f"Z_{index_left} Z_{index_right}", coupling_parameter))
         return SpinOp(ham, spin=Fraction(1, 2), register_length=register_length)
+
+
+    def z_symmetry_ops(self, display_format: Optional[str] = None) -> SpinOp:
+        """Return the Hamiltonian of the Z operator in terms of `SpinOp`.
+
+        Args:
+            display_format: Not supported for Spin operators. If specified, it will be ignored.
+
+        Returns:
+            SpinOp: The Hamiltonian of the Heisenberg model.
+        """
+        if display_format is not None:
+            logger.warning(
+                "Spin operators do not support display-format. Provided display-format "
+                "parameter will be ignored."
+            )
+        ham = []
+        weighted_edge_list = self._lattice.weighted_edge_list
+        register_length = self._lattice.num_nodes
+        # kinetic terms
+        for node_a, node_b, weight in weighted_edge_list:
+            if node_a == node_b:
+                index = node_a
+                ham.append((f"X_{index}", weight))
+
+            else:
+                index_left = node_a
+                index_right = node_b
+                coupling_parameter = weight
+                ham.append((f"Z_{index_left} Z_{index_right}", coupling_parameter))
+        return SpinOp(ham, spin=Fraction(1, 2), register_length=register_length)
+
+
+    def y_symmetry_ops(self, display_format: Optional[str] = None) -> SpinOp:
+        """Return the Hamiltonian of the Z operator in terms of `SpinOp`.
+
+        Args:
+            display_format: Not supported for Spin operators. If specified, it will be ignored.
+
+        Returns:
+            SpinOp: The Hamiltonian of the Heisenberg model.
+        """
+        if display_format is not None:
+            logger.warning(
+                "Spin operators do not support display-format. Provided display-format "
+                "parameter will be ignored."
+            )
+        ham = []
+        weighted_edge_list = self._lattice.weighted_edge_list
+        register_length = self._lattice.num_nodes
+        # kinetic terms
+        for node_a, node_b, weight in weighted_edge_list:
+            if node_a == node_b:
+                index = node_a
+                ham.append((f"X_{index}", weight))
+
+            else:
+                index_left = node_a
+                index_right = node_b
+                coupling_parameter = weight
+                ham.append((f"Y_{index_left} Y_{index_right}", coupling_parameter))
+        return SpinOp(ham, spin=Fraction(1, 2), register_length=register_length)
+
+
+    def x_symmetry_ops(self, display_format: Optional[str] = None) -> SpinOp:
+        """Return the Hamiltonian of the Z operator in terms of `SpinOp`.
+
+        Args:
+            display_format: Not supported for Spin operators. If specified, it will be ignored.
+
+        Returns:
+            SpinOp: The Hamiltonian of the Heisenberg model.
+        """
+        if display_format is not None:
+            logger.warning(
+                "Spin operators do not support display-format. Provided display-format "
+                "parameter will be ignored."
+            )
+        ham = []
+        weighted_edge_list = self._lattice.weighted_edge_list
+        register_length = self._lattice.num_nodes
+        # kinetic terms
+        for node_a, node_b, weight in weighted_edge_list:
+            if node_a == node_b:
+                index = node_a
+                ham.append((f"X_{index}", weight))
+
+            else:
+                index_left = node_a
+                index_right = node_b
+                coupling_parameter = weight
+                ham.append((f"X_{index_left} X_{index_right}", coupling_parameter))
+        return SpinOp(ham, spin=Fraction(1, 2), register_length=register_length)
+
+
+    def perturbation_ops(self, randseed, display_format: Optional[str] = None) -> SpinOp:
+        """Return the Hamiltonian of the Heisenberg model in terms of `SpinOp`.
+
+        Args:
+            display_format: Not supported for Spin operators. If specified, it will be ignored.
+
+        Returns:
+            SpinOp: The Hamiltonian of the Heisenberg model.
+        """
+        import random
+        if randseed is not None:
+            random.seed(randseed)
+
+        if display_format is not None:
+            logger.warning(
+                "Spin operators do not support display-format. Provided display-format "
+                "parameter will be ignored."
+            )
+        ham = []
+        weighted_edge_list = self._lattice.weighted_edge_list
+        register_length = self._lattice.num_nodes
+        # kinetic terms
+        for node_a, node_b, weight in weighted_edge_list:
+            if node_a == node_b:
+                index = node_a
+                ham.append((f"X_{index}", weight))
+
+            else:
+                index_left = node_a
+                index_right = node_b
+                coupling_parameter = weight
+                perturbationIdx = random.randint(1,3)
+                if perturbationIdx == 1:
+                    ham.append((f"X_{index_left} X_{index_right}", coupling_parameter))
+                elif perturbationIdx == 2:
+                    ham.append((f"Y_{index_left} Y_{index_right}", coupling_parameter))
+                else:
+                    ham.append((f"Z_{index_left} Z_{index_right}", coupling_parameter))
+        return SpinOp(ham, spin=Fraction(1, 2), register_length=register_length)

@@ -1,0 +1,37 @@
+ansatz = Efficient_SU2
+maxiter = 500
+energy = -13
+time = ?
+
+ansatz = Efficient_SU2
+maxiter = 75
+energy = -5.58
+time = 66s
+
+ansatz = Heis_Layers_1
+maxiter = 75
+energy = -0.32
+time = 165s
+
+ansatz = Heis_Layers_1
+maxiter = 75
+initial state = 0's
+energy = 18 (stuck at global max)
+time = 155s
+
+ansatz = Heis_Layers_1
+maxiter = 75
+initial state = 1's
+energy = -8.5
+time = 160s
+
+ansatz = Heis_Layers_1
+maxiter = 500
+initial state = 1's
+energy = -9.9 (Plateued)
+time = 800s
+
+ansatz = Heis_Layers_2
+maxiter = 75
+energy = 0.56 (all noise)
+time = 325s
